@@ -21,6 +21,12 @@ const nextConfig = {
     },{
       source: "/api/movies/:id",
       destination:`https://api.themoviedb.org/3/movie/:id?api_key=${API_KEY}&language=ko-KR`
+    },{
+      source:"/api/movies/credits/:id",
+      destination: `https://api.themoviedb.org/3/movie/:id/credits?api_key=${API_KEY}&language=ko-KR`
+    },{
+      source:"/api/movies/image/:path",
+      destination: `https://image.tmdb.org/t/p/w500/:path`
     }];
   },
 };

@@ -15,6 +15,9 @@ export default function NavBar() {
         <Link href={"/top"}>
           <a className={router.pathname === "/top" ? "active" : ""}>Top</a>
         </Link>
+        <Link href={"/coming"}> 
+          <a className={router.pathname === "/coming" ? "active" : ""}>upComing</a>
+        </Link>
       </div>
       <style jsx>{`
         nav {

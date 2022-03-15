@@ -1,11 +1,22 @@
 import { Router } from "next/dist/client/router";
+import { useState, useEffect } from "react/cjs/react.development";
+import Moive from "../components/Movie";
 import Seo from "../components/Seo";
 
 export default function top() {
+  const [movies, setMovies] = useState();
+
+  useEffect(() => {
+    (async () => {
+      const { results } = await (await fetch(`/api/movies`)).json();
+      setMovies(results);
+    })();
+  }, []);
+
   return (
     <div>
-      <Seo title={"Top"}/>  
-      <h1>top</h1>
+      <Seo title={"Top"} />
+      <Moive movies={movies} />
     </div>
   );
 }
