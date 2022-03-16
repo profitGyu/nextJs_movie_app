@@ -5,26 +5,27 @@ import Seo from "../../components/Seo";
 export default function Detail() {
   const router = useRouter();
   const [movie, setMovie] = useState({});
-  const [credits, setCredits] = useState({})
+  const [credits, setCredits] = useState({});
 
   useEffect(() => {
     (async () => {
-      const resultCredit = await(
+      const resultCredit = await (
         await fetch(`/api/movies/credits/${router.query.id}`)
       ).json();
-      console.log(resultCredit)
       setCredits(resultCredit);
     })();
-  }, [])
-  
+  }, [credits]);
+
   useEffect(() => {
     (async () => {
       const result = await (
         await fetch(`/api/movies/${router.query.id}`)
       ).json();
+
       setMovie(result);
     })();
   }, [router]);
+
   return (
     <div>
       <Seo title={router.query.title} />
@@ -47,7 +48,7 @@ export default function Detail() {
               ))}
               <span>시간: {movie.runtime}분</span>
             </div>
-            <span>{movie.vote_average}</span>
+            <span>사용자 점수: {movie.vote_average}</span>
             <h3>{movie.tagline}</h3>
             <div>
               <p>개요</p>
@@ -57,7 +58,24 @@ export default function Detail() {
         </div>
       </div>
 
-      <div>힝9힝9</div>
+      <div className="cast_container">
+        <h3>출연진</h3>
+        <div className="cast_container_wrap">
+          <ul className="scroll">
+            {credits.cast?.map((people, index) => (
+              <li className="cast_card" key={index}>
+                <img
+                  className="cast_img"
+                  src={`https://image.tmdb.org/t/p/w500${people.profile_path}`}
+                ></img>
+                <p className="name">{people.name}</p>
+                <p className="character">{people.character}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <div>sdsdsds</div>
 
       <style>{`
         .detail_bg {
@@ -87,6 +105,66 @@ export default function Detail() {
         }
         .detail_ct_wrapper ul{
           display:flex;
+        }
+        .cast_container{
+          max-width: 1400px;
+          margin: 0 auto;
+        }
+        .cast_container_wrap{
+          width: 100%;
+          white-space: nowrap;
+          overflow-x: scroll;
+          overflow-y: hidden;
+        }
+        .cast_card{
+          height: 270px;
+          border-radius: 12px;
+          transition: transform 0.2s ease-in-out;
+          box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+          margin: 10px 10px 10px 4px;
+        }
+        .cast_container ul {
+          list-style:none;
+        }
+        .cast_container_wrap::-webkit-scrollbar {
+          width:1px;
+        }
+        .cast_container_wrap::-webkit-scrollbar-thumb {
+          background-color:#424342; /*스크롤바의 색상*/
+          border-radius: 10px;
+          background-clip: padding-box;
+          border: 4px solid transparent;
+        }
+        .cast_container_wrap::-webkit-scrollbar-track {
+          background:rgba(0,0,0,0.1);
+          border-radius: 10px;
+        }
+        .cast_container li {
+          display:inline-block
+        }
+        .cast_img{
+          min-width: 138px;
+          width: 138px;
+          height: 175px;
+          display: block;
+          border-top-right-radius:12px;
+          border-top-left-radius:12px;  
+        }
+        .name{
+          padding-left:10px;
+          min-width: 138px;
+          width: 138px;
+          font-weight: bold;
+          overflow: hidden;
+          color: #000;
+        }
+        .character{
+          padding-left:10px;
+          width: 138px;
+          margin-top: -15px;
+          font-size: 0.9em;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
       `}</style>
     </div>
