@@ -14,7 +14,7 @@ export default function Detail() {
       ).json();
       setCredits(resultCredit);
     })();
-  }, [credits]);
+  }, [router.query.id]);
 
   useEffect(() => {
     (async () => {
@@ -24,7 +24,7 @@ export default function Detail() {
 
       setMovie(result);
     })();
-  }, [router]);
+  }, [router.query.id]);
 
   return (
     <div>
@@ -137,7 +137,7 @@ export default function Detail() {
         }
         .cast_container_wrap::-webkit-scrollbar-track {
           background:rgba(0,0,0,0.1);
-          border-radius: 10px;
+          
         }
         .cast_container li {
           display:inline-block

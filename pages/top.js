@@ -1,9 +1,8 @@
-import { Router } from "next/dist/client/router";
 import { useState, useEffect } from "react/cjs/react.development";
 import Moive from "../components/Movie";
 import Seo from "../components/Seo";
 
-export default function top() {
+export default function Top() {
   const [movies, setMovies] = useState();
 
   useEffect(() => {

@@ -29,6 +29,14 @@ const nextConfig = {
       destination: `https://image.tmdb.org/t/p/w500/:path`
     }];
   },
+  images: {
+    domains: ['image.tmdb.org'],
+  },
+
 };
+
+
+
+
 
 module.exports = nextConfig;

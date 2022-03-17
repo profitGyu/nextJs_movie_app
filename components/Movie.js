@@ -1,6 +1,20 @@
 import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/router";
 
-export default function Moive({movies}) {
+export default function Moive({ movies }) {
+  const router = useRouter();
+  const onClick = (id, title) => {
+    router.push(
+      {
+        pathname: `/movies/${id}`,
+        query: {
+          title: title,
+        },
+      },
+      `/movies/${id}`
+    );
+  };
   return (
     <div className="container">
       {!movies && <h4>Loading ...</h4>}
@@ -10,7 +24,13 @@ export default function Moive({movies}) {
           onClick={() => onClick(movie.id, movie.original_title)}
           key={movie.id}
         >
-          <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
+          <Image
+            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+            alt="Movie"
+            className="movie_img"
+            width={213}
+            height={320}
+          />
           <h4>
             <Link
               href={{
@@ -38,15 +58,15 @@ export default function Moive({movies}) {
           gap: 20px;
         }
 
-        .movie img {
+        .movie_img {
           max-width: 100%;
           max-height: 320px;
-          border-radius: 12px;
+          border-radius: 18px;
           transition: transform 0.2s ease-in-out;
           box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+          cursor: pointer;
         }
-
-        .movie:hover img {
+        .movie:hover {
           transform: scale(1.05) translateY(-10px);
         }
 

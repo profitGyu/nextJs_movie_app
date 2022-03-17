@@ -1,12 +1,18 @@
 import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function NavBar() {
   const router = useRouter();
   return (
     <nav>
       <Link href={"/"}>
-        <a><img className="movieLogo" src="/movieLogo.svg" /></a>
+        <a>
+          <Image src="/movieLogo.svg" className="movieLogo" 
+          width={40}
+          height={40}
+          alt="logo"/>
+        </a>
       </Link>
       <div>
         <Link href={"/"}>
@@ -15,8 +21,10 @@ export default function NavBar() {
         <Link href={"/top"}>
           <a className={router.pathname === "/top" ? "active" : ""}>Top</a>
         </Link>
-        <Link href={"/coming"}> 
-          <a className={router.pathname === "/coming" ? "active" : ""}>upComing</a>
+        <Link href={"/coming"}>
+          <a className={router.pathname === "/coming" ? "active" : ""}>
+            upComing
+          </a>
         </Link>
       </div>
       <style jsx>{`
@@ -30,7 +38,7 @@ export default function NavBar() {
           box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
             rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
         }
-        .movieLogo{
+        .movieLogo {
           width: 40px;
           height: 40px;
         }
